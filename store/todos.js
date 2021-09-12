@@ -1,4 +1,4 @@
-import firebase from "~/plugins/firebase";
+import firebase from "~/plugins/firebase"
 import { firestoreAction } from "vuexfire";
 
 const db = firebase.firestore()
@@ -17,7 +17,7 @@ export const actions = {
       todosRef.add({
         name: name,
         done: false,
-        created: firebase.firestore.FieldValue.severTimestamp()
+        created: firebase.firestore.FieldValue.serverTimestamp()
       })
     }
   }),
@@ -29,4 +29,10 @@ export const actions = {
       done: !todo.done
     })
   })
+}
+
+export const getters = {
+  orderdTodos: state => {
+    return _.sortBy(state.todos, 'created')
+  }
 }
